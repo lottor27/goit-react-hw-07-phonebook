@@ -1,12 +1,12 @@
-import SavedContact from 'components/SavedContact/savedContact';
+import SavedContact from 'components/PhonebookList/PhoneBookList';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from '../../redux/operations';
-import { selectorContacts, selectorFilter } from '../../redux/selectors';
-import css from './PhonebookForm.module.css';
+import { selectContacts, selectFilter } from '../../redux/selectors';
+
 
 const Contacts = () => {
-  const contacts = useSelector(selectorContacts);
-  const filter = useSelector(selectorFilter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleClick = async e => {
@@ -35,7 +35,7 @@ const Contacts = () => {
       ))}
     </ul>
   ) : (
-    <p className="text-message">The contact list is empty.</p>
+    <p >The contact list is empty.</p>
   );
 };
 
