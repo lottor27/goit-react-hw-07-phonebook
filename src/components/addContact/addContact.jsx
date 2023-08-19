@@ -25,18 +25,16 @@ const AddContactForm = () => {
 
   const onAddToContacts = e => {
     e.preventDefault();
-    const idContact = nanoid();
-    const dataFields = { name: name, number: number, id: idContact };
+    const dataFields = { name: name, phone: number };
     const isContact = contacts.find(
       contact => contact.name === dataFields.name
     );
     !isContact
       ? dispatch(addContact(dataFields))
-      : alert(`${name} is already in contacts`);
+      : toast.warn(`${name} is already in contacts`);
     setName('');
     setNumber('');
   };
-
   return (
     <>
       <form onSubmit={onAddToContacts} className={css.formbox}>
@@ -61,7 +59,6 @@ const AddContactForm = () => {
           value={number}
           onChange={onChangeInput}
           required
-          
         />
         <button type="submit" className={css.btnsubmit}>
           Add contact

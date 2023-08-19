@@ -13,6 +13,7 @@ const Contacts = () => {
     if (e.target.tagName === 'BUTTON') {
       const id = e.target.getAttribute('data-id');
       console.log(id);
+      console.log(e.target.value);
       await dispatch(deleteContact(id));
       dispatch(fetchContacts());
     }

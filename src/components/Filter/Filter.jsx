@@ -9,6 +9,7 @@ const SearchContact = ({ searchTitle }) => {
   const contacts = useSelector(selectContacts);
 
   const handleSearchInput = e => {
+    console.log(e.target.value);
     dispatch(updateFilter(e.target.value.trim()));
   };
 
