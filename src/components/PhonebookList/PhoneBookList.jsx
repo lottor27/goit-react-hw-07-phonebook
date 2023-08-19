@@ -13,4 +13,5 @@ const SavedContact = ({ id, name, number }) => {
   );
 };
 
+
 export default SavedContact;

@@ -1,7 +1,7 @@
-import SavedContact from 'components/PhonebookList/PhoneBookList';
+import SavedContact from 'components/SavedContact/savedContact';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/reducers/contactsSlice';
-import { selectorContacts, selectorFilter } from 'redux/selectors';
+import { deleteContact, fetchContacts } from '../../redux/operations';
+import { selectorContacts, selectorFilter } from '../../redux/selectors';
 import css from './PhonebookForm.module.css';
 
 const Contacts = () => {
@@ -9,25 +9,29 @@ const Contacts = () => {
   const filter = useSelector(selectorFilter);
   const dispatch = useDispatch();
 
-  const handleClick = e => {
+  const handleClick = async e => {
     if (e.target.tagName === 'BUTTON') {
       const id = e.target.getAttribute('data-id');
-      dispatch(deleteContact(id));
+      console.log(id);
+      await dispatch(deleteContact(id));
+      dispatch(fetchContacts());
     }
   };
 
   const filteredContacts = () => {
-    if (filter !== '')
+    if (filter !== '') {
       return contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       );
-    else if (filter === '') return contacts;
+    } else if (filter === '') {
+      return contacts;
+    }
   };
 
   return contacts.length > 0 ? (
-    <ul className={css.list}  onClick={handleClick}>
-      {filteredContacts().map(({ id, name, number }) => (
-        <SavedContact key={id} id={id} name={name} number={number} />
+    <ul onClick={handleClick}>
+      {filteredContacts().map(({ id, name, phone }) => (
+        <SavedContact key={id} id={id} name={name} number={phone} />
       ))}
     </ul>
   ) : (

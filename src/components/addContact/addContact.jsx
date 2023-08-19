@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectorContacts } from 'redux/selectors';
-import { addContact } from 'redux/reducers/contactsSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectorContacts } from '../../redux/selectors';
+import { addContact } from '../../redux/operations';
 import css from './addContact.module.css';
 
 const nameInputId = nanoid();
@@ -59,6 +61,7 @@ const AddContactForm = () => {
           value={number}
           onChange={onChangeInput}
           required
+          
         />
         <button type="submit" className={css.btnsubmit}>
           Add contact
